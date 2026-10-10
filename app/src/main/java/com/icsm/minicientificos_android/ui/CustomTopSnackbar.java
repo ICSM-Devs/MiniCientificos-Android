@@ -23,6 +23,11 @@ public class CustomTopSnackbar {
         binding.tvSnackbarMessage.setText("✨ ¡" + productName + " agregado al carrito!");
 
         final View snackbarView = binding.getRoot();
+        android.widget.FrameLayout.LayoutParams params = new android.widget.FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        snackbarView.setLayoutParams(params);
         rootView.addView(snackbarView);
         
         binding.tvVerCarrito.setOnClickListener(v -> {
@@ -35,9 +40,12 @@ public class CustomTopSnackbar {
 
         // Position above screen initially
         snackbarView.post(() -> {
-            snackbarView.setTranslationY(-snackbarView.getHeight() - 100);
+            // El margen superior (marginTop="32dp" en el XML) puede hacer que la altura sola
+            // no lo oculte si no bajamos el root view lo suficiente o lo sumamos.
+            float outPosition = -snackbarView.getHeight() - 150f;
+            snackbarView.setTranslationY(outPosition);
             
-            // Slide in
+            // Slide in (baja hasta un ligero margen en Y, digamos 16px si quisiéramos)
             ObjectAnimator slideIn = ObjectAnimator.ofFloat(snackbarView, "translationY", 0f);
             slideIn.setDuration(400);
             slideIn.setInterpolator(new DecelerateInterpolator());
