@@ -24,6 +24,14 @@ public class CustomTopSnackbar {
 
         final View snackbarView = binding.getRoot();
         rootView.addView(snackbarView);
+        
+        binding.tvVerCarrito.setOnClickListener(v -> {
+            if (activity instanceof androidx.fragment.app.FragmentActivity) {
+                CartBottomSheetDialog bottomSheet = new CartBottomSheetDialog();
+                bottomSheet.show(((androidx.fragment.app.FragmentActivity) activity).getSupportFragmentManager(), "CartBottomSheet");
+            }
+            rootView.removeView(snackbarView);
+        });
 
         // Position above screen initially
         snackbarView.post(() -> {
@@ -37,16 +45,18 @@ public class CustomTopSnackbar {
 
             // Slide out after delay
             snackbarView.postDelayed(() -> {
-                ObjectAnimator slideOut = ObjectAnimator.ofFloat(snackbarView, "translationY", -snackbarView.getHeight() - 100);
-                slideOut.setDuration(400);
-                slideOut.setInterpolator(new DecelerateInterpolator());
-                slideOut.addListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        rootView.removeView(snackbarView);
-                    }
-                });
-                slideOut.start();
+                if (snackbarView.getParent() != null) {
+                    ObjectAnimator slideOut = ObjectAnimator.ofFloat(snackbarView, "translationY", -snackbarView.getHeight() - 100);
+                    slideOut.setDuration(400);
+                    slideOut.setInterpolator(new DecelerateInterpolator());
+                    slideOut.addListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            rootView.removeView(snackbarView);
+                        }
+                    });
+                    slideOut.start();
+                }
             }, 2500);
         });
     }

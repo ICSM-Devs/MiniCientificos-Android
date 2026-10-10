@@ -30,12 +30,15 @@
         tools:text="✨ ¡Kit Bobina Tesla agregado al carrito!" />
 
     <TextView
+        android:id="@+id/tv_ver_carrito"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins"
         android:text="Ver Carrito"
         android:textColor="@color/gold_yellow"
         android:textSize="12sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="?attr/selectableItemBackground"
+        android:padding="8dp" />
 
 </LinearLayout>
