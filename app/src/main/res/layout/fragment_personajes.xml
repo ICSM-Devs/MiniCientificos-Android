@@ -99,11 +99,12 @@
 
                     <ImageView
                         android:id="@+id/iv_titan_avatar"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_alignParentStart="true"
+                        android:scaleType="fitCenter"
                         android:contentDescription="@string/titan_name"
-                        android:src="@drawable/ic_titan_avatar" />
+                        android:src="@drawable/tesla_fullbody" />
 
                     <TextView
                         android:id="@+id/tv_titan_badge"
@@ -275,11 +276,12 @@
 
                     <ImageView
                         android:id="@+id/iv_tesla_avatar"
-                        android:layout_width="90dp"
-                        android:layout_height="90dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
                         android:layout_alignParentStart="true"
+                        android:scaleType="fitCenter"
                         android:contentDescription="@string/tesla_name"
-                        android:src="@drawable/ic_tesla_avatar" />
+                        android:src="@drawable/teslita_fullbody" />
 
                     <TextView
                         android:id="@+id/tv_tesla_badge"

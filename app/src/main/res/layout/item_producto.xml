@@ -4,126 +4,139 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp"
-    app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/card_corner_radius"
-    app:cardElevation="@dimen/card_elevation"
+    android:layout_margin="8dp"
+    app:cardBackgroundColor="@color/card_bg"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
     app:strokeColor="@color/card_stroke"
     app:strokeWidth="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_m">
+        android:padding="12dp">
 
-        <!-- Badge Disponibilidad / Stock -->
-        <TextView
-            android:id="@+id/tv_producto_stock_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_badge_rounded"
-            android:backgroundTint="@color/badge_stock_bg"
-            android:fontFamily="@font/poppins"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="3dp"
-            android:textColor="@color/badge_stock_text"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+        <!-- Contenedor Circular/Redondeado para la Imagen -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_image_container"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            app:cardBackgroundColor="@color/pc_sky"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="En Stock" />
-
-        <!-- Imagen del Producto Centrada -->
-        <FrameLayout
-            android:id="@+id/fl_producto_image_container"
-            android:layout_width="88dp"
-            android:layout_height="88dp"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:background="@drawable/bg_badge_rounded"
-            android:backgroundTint="@color/tesla_bg"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_producto_stock_badge">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
-                android:id="@+id/iv_producto_imagen"
+                android:id="@+id/iv_producto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Imagen del producto"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_flask" />
-        </FrameLayout>
+                android:padding="16dp"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/amiguru_grande" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Categoría -->
+        <!-- Top Tag Insignia Superior -->
         <TextView
-            android:id="@+id/tv_producto_categoria"
-            android:layout_width="0dp"
+            android:id="@+id/tv_top_tag"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/text_light"
-            android:textSize="11sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/bg_washi_tape"
+            android:fontFamily="@font/kalam"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/card_image_container"
+            app:layout_constraintTop_toTopOf="@id/card_image_container"
+            android:elevation="2dp"
+            tools:text="Hecho a mano"
+            android:visibility="visible"/>
+
+        <!-- Mini Píldora Informativa (Badge Chip) -->
+        <TextView
+            android:id="@+id/tv_badge_chip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_badge_tag"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/pc_navy"
+            android:textSize="10sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fl_producto_image_container"
-            tools:text="Kits Científicos" />
+            app:layout_constraintTop_toBottomOf="@id/card_image_container"
+            tools:text="Coleccionable" />
 
         <!-- Nombre del Producto -->
         <TextView
-            android:id="@+id/tv_producto_nombre"
+            android:id="@+id/tv_nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/fredoka"
+            android:textColor="@color/pc_navy"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:maxLines="2"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_badge_chip"
+            tools:text="Amigurumi Grande" />
+
+        <!-- Descripción Corta -->
+        <TextView
+            android:id="@+id/tv_descripcion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/fredoka"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp"
             android:maxLines="2"
-            android:textColor="@color/navy_blue"
-            android:textSize="15sp"
-            android:textStyle="bold"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_producto_categoria"
-            tools:text="Kit Bobina Tesla" />
+            app:layout_constraintTop_toBottomOf="@id/tv_nombre"
+            tools:text="Increíble muñeco tejido a mano..." />
 
-        <!-- Precio Destacado en Soles -->
+        <!-- Precio -->
         <TextView
-            android:id="@+id/tv_producto_precio"
+            android:id="@+id/tv_precio"
+            style="@style/TextAppearance.MiniCientificos.Price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:fontFamily="@font/fredoka"
-            android:textColor="@color/primary_blue"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/btn_producto_comprar"
-            app:layout_constraintEnd_toStartOf="@id/btn_producto_comprar"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/btn_producto_comprar"
-            tools:text="S/ 65.00" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_descripcion"
+            tools:text="S/ 149.90" />
 
-        <!-- Botón flotante con icono de compra -->
+        <!-- Botón Agregar Interactívo -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_producto_comprar"
+            android:id="@+id/btn_agregar"
             style="@style/Widget.MiniCientificos.Button.Accent"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:contentDescription="Comprar o consultar"
-            android:insetLeft="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
             android:insetTop="0dp"
-            android:insetRight="0dp"
             android:insetBottom="0dp"
-            android:padding="0dp"
-            app:cornerRadius="20dp"
+            android:text="AGREGAR"
+            android:textSize="14sp"
             app:icon="@drawable/ic_shopping_cart"
             app:iconGravity="textStart"
-            app:iconPadding="0dp"
             app:iconSize="18dp"
-            app:iconTint="@color/navy_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_producto_nombre" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_precio" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

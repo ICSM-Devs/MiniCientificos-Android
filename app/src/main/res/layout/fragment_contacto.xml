@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/navy_blue"
+    android:background="@color/bg_light"
     android:fillViewport="true"
     tools:context=".ui.ContactoFragment">
 
@@ -13,35 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_m">
 
-        <!-- DECORACIÓN ESTRELLAS ESPACIALES -->
-        <ImageView
-            android:id="@+id/iv_star_1"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="Estrella"
-            android:src="@drawable/ic_star_decoration"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_star_2"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:contentDescription="Estrella"
-            android:src="@drawable/ic_star_decoration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_star_3"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:contentDescription="Estrella"
-            android:src="@drawable/ic_star_decoration"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- HEADER Y TÍTULO ASTRONÓMICO -->
+        <!-- HEADER Y TÍTULO "KAWAII CIENTÍFICO" -->
         <TextView
             android:id="@+id/tv_contacto_titulo"
             android:layout_width="0dp"
@@ -50,7 +22,7 @@
             android:fontFamily="@font/fredoka"
             android:gravity="center"
             android:text="Contacto Espacial 🌌"
-            android:textColor="@color/gold_yellow"
+            android:textColor="@color/pc_navy"
             android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,28 +34,102 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/nunito"
             android:gravity="center"
             android:text="Envíanos una transmisión desde cualquier rincón del planeta o la galaxia"
-            android:textColor="#E0F7FE"
+            android:textColor="@color/text_secondary"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_contacto_titulo" />
+
+        <!-- BANNER KAWAII: TITAN Y TESLA LISTOS PARA LEER TU MENSAJE -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_mascotas_banner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_m"
+            app:cardBackgroundColor="@color/pc_sky"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_contacto_sub"
+            app:strokeColor="@color/pc_sky_border"
+            app:strokeWidth="1.5dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_m">
+
+                <!-- Avatares de Titan y Tesla juntos -->
+                <ImageView
+                    android:id="@+id/iv_titan_contact"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/titan_name"
+                    android:src="@drawable/tesla_head"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_tesla_contact"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginStart="-16dp"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="@string/tesla_name"
+                    android:src="@drawable/teslita_head"
+                    app:layout_constraintStart_toEndOf="@id/iv_titan_contact"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Mensaje de los personajes -->
+                <TextView
+                    android:id="@+id/tv_mascotas_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_s"
+                    android:fontFamily="@font/fredoka"
+                    android:text="¡Titan y Tesla están listos para leer tu mensaje! 💌"
+                    android:textColor="@color/pc_navy"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_tesla_contact"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_mascotas_sub"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_s"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/kalam"
+                    android:text="Escríbenos tu consulta y te responderemos a la velocidad de la luz..."
+                    android:textColor="@color/pc_navy_deep"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_tesla_contact"
+                    app:layout_constraintTop_toBottomOf="@id/tv_mascotas_title" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- TARJETA CONTENEDORA DEL FORMULARIO -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_form_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_l"
-            app:cardBackgroundColor="#16324F"
+            android:layout_marginTop="@dimen/spacing_m"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="@dimen/corner_radius_l"
-            app:cardElevation="8dp"
+            app:cardElevation="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_contacto_sub"
-            app:strokeColor="@color/primary_blue"
+            app:layout_constraintTop_toBottomOf="@id/card_mascotas_banner"
+            app:strokeColor="@color/pc_sky_border"
             app:strokeWidth="1.5dp">
 
             <LinearLayout
@@ -99,20 +145,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre Completo *"
-                    android:textColorHint="#8D99AE"
-                    app:boxStrokeColor="@color/primary_blue"
+                    android:textColorHint="@color/text_light"
+                    app:boxStrokeColor="@color/pc_blue"
                     app:boxStrokeWidth="1.5dp"
-                    app:hintTextColor="@color/primary_blue"
+                    app:hintTextColor="@color/pc_blue"
                     app:startIconDrawable="@drawable/ic_person"
-                    app:startIconTint="@color/primary_blue">
+                    app:startIconTint="@color/pc_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_nombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/nunito"
                         android:inputType="textPersonName"
-                        android:textColor="@color/white"
+                        android:textColor="@color/pc_navy"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,20 +170,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_m"
                     android:hint="Correo Electrónico *"
-                    android:textColorHint="#8D99AE"
-                    app:boxStrokeColor="@color/primary_blue"
+                    android:textColorHint="@color/text_light"
+                    app:boxStrokeColor="@color/pc_blue"
                     app:boxStrokeWidth="1.5dp"
-                    app:hintTextColor="@color/primary_blue"
+                    app:hintTextColor="@color/pc_blue"
                     app:startIconDrawable="@drawable/ic_mail"
-                    app:startIconTint="@color/primary_blue">
+                    app:startIconTint="@color/pc_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/nunito"
                         android:inputType="textEmailAddress"
-                        android:textColor="@color/white"
+                        android:textColor="@color/pc_navy"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,20 +195,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_m"
                     android:hint="Teléfono / WhatsApp *"
-                    android:textColorHint="#8D99AE"
-                    app:boxStrokeColor="@color/primary_blue"
+                    android:textColorHint="@color/text_light"
+                    app:boxStrokeColor="@color/pc_blue"
                     app:boxStrokeWidth="1.5dp"
-                    app:hintTextColor="@color/primary_blue"
+                    app:hintTextColor="@color/pc_blue"
                     app:startIconDrawable="@drawable/ic_phone"
-                    app:startIconTint="@color/primary_blue">
+                    app:startIconTint="@color/pc_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_telefono"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/nunito"
                         android:inputType="phone"
-                        android:textColor="@color/white"
+                        android:textColor="@color/pc_navy"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,20 +220,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_m"
                     android:hint="Asunto *"
-                    android:textColorHint="#8D99AE"
-                    app:boxStrokeColor="@color/primary_blue"
+                    android:textColorHint="@color/text_light"
+                    app:boxStrokeColor="@color/pc_blue"
                     app:boxStrokeWidth="1.5dp"
-                    app:hintTextColor="@color/primary_blue"
+                    app:hintTextColor="@color/pc_blue"
                     app:startIconDrawable="@drawable/ic_subject"
-                    app:startIconTint="@color/primary_blue">
+                    app:startIconTint="@color/pc_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_asunto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/nunito"
                         android:inputType="text"
-                        android:textColor="@color/white"
+                        android:textColor="@color/pc_navy"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -199,22 +245,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_m"
                     android:hint="Mensaje Espacial *"
-                    android:textColorHint="#8D99AE"
-                    app:boxStrokeColor="@color/primary_blue"
+                    android:textColorHint="@color/text_light"
+                    app:boxStrokeColor="@color/pc_blue"
                     app:boxStrokeWidth="1.5dp"
-                    app:hintTextColor="@color/primary_blue"
+                    app:hintTextColor="@color/pc_blue"
                     app:startIconDrawable="@drawable/ic_message"
-                    app:startIconTint="@color/primary_blue">
+                    app:startIconTint="@color/pc_blue">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_mensaje"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
+                        android:fontFamily="@font/nunito"
                         android:gravity="top"
                         android:inputType="textMultiLine"
                         android:lines="4"
-                        android:textColor="@color/white"
+                        android:textColor="@color/pc_navy"
                         android:textSize="14sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -225,7 +271,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="@dimen/spacing_l"
-                    android:backgroundTint="#00A8E8"
                     android:fontFamily="@font/fredoka"
                     android:text="🚀 ENVIAR MENSAJE ESPACIAL"
                     android:textColor="@color/white"

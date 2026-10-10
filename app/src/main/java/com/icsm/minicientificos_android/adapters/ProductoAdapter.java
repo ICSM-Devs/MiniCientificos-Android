@@ -1,34 +1,41 @@
 package com.icsm.minicientificos_android.adapters;
 
-import android.content.Context;
+import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.button.MaterialButton;
 import com.icsm.minicientificos_android.R;
 import com.icsm.minicientificos_android.databinding.ItemProductoBinding;
-import com.icsm.minicientificos_android.models.ProductoMock;
+import com.icsm.minicientificos_android.models.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.ProductoViewHolder> {
 
-    public interface OnProductoClickListener {
-        void onComprarClick(ProductoMock producto);
+    public interface OnProductClickListener {
+        void onProductClick(Producto producto);
+        void onAddToCart(Producto producto, MaterialButton btn);
     }
 
-    private final List<ProductoMock> listaOriginal;
-    private final List<ProductoMock> listaFiltrada;
-    private final OnProductoClickListener listener;
+    private List<Producto> items = new ArrayList<>();
+    private final OnProductClickListener listener;
 
-    public ProductoAdapter(List<ProductoMock> lista, OnProductoClickListener listener) {
-        this.listaOriginal = new ArrayList<>(lista);
-        this.listaFiltrada = new ArrayList<>(lista);
+    public ProductoAdapter(OnProductClickListener listener) {
         this.listener = listener;
+    }
+
+    public void updateList(List<Producto> newItems) {
+        this.items = newItems;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -41,33 +48,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductoViewHolder holder, int position) {
-        holder.bind(listaFiltrada.get(position));
+        holder.bind(items.get(position), listener);
     }
 
     @Override
     public int getItemCount() {
-        return listaFiltrada.size();
+        return items != null ? items.size() : 0;
     }
 
-    public void filtrar(String texto, String categoria) {
-        String q = texto != null ? texto.toLowerCase().trim() : "";
-        listaFiltrada.clear();
-
-        for (ProductoMock item : listaOriginal) {
-            boolean coincideTexto = item.getNombre().toLowerCase().contains(q)
-                    || item.getDescripcion().toLowerCase().contains(q);
-
-            boolean coincideCategoria = categoria.equals("Todas")
-                    || item.getCategoria().equalsIgnoreCase(categoria);
-
-            if (coincideTexto && coincideCategoria) {
-                listaFiltrada.add(item);
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    class ProductoViewHolder extends RecyclerView.ViewHolder {
+    static class ProductoViewHolder extends RecyclerView.ViewHolder {
         private final ItemProductoBinding binding;
 
         public ProductoViewHolder(@NonNull ItemProductoBinding binding) {
@@ -75,24 +64,55 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
             this.binding = binding;
         }
 
-        public void bind(ProductoMock item) {
-            Context context = itemView.getContext();
-            binding.tvProductoNombre.setText(item.getNombre());
-            binding.tvProductoCategoria.setText(item.getCategoria());
-            binding.tvProductoPrecio.setText(item.getPrecioFormateado());
-            binding.tvProductoStockBadge.setText(item.getDisponibilidad());
-            binding.ivProductoImagen.setImageResource(item.getImagenResId());
+        public void bind(Producto item, OnProductClickListener listener) {
+            binding.tvNombre.setText(item.getNombre());
+            binding.tvDescripcion.setText(item.getDescripcion());
+            binding.tvPrecio.setText(String.format(Locale.getDefault(), "S/ %.2f", item.getPrecio()));
+            binding.ivProducto.setImageResource(item.getDrawableResId());
 
-            if ("En Stock".equalsIgnoreCase(item.getDisponibilidad())) {
-                binding.tvProductoStockBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.badge_stock_bg));
-                binding.tvProductoStockBadge.setTextColor(ContextCompat.getColor(context, R.color.badge_stock_text));
+            // Top Tag (Eco, Hecho a mano, Nuevo)
+            if (item.getTopTag() != null && !item.getTopTag().isEmpty()) {
+                binding.tvTopTag.setVisibility(View.VISIBLE);
+                binding.tvTopTag.setText(item.getTopTag());
+                // Configurar color según el tag
+                switch (item.getTopTag().toLowerCase()) {
+                    case "eco":
+                        binding.tvTopTag.setTextColor(Color.WHITE);
+                        binding.tvTopTag.setBackgroundResource(R.drawable.bg_badge_tag); // Se podría crear un fondo verde
+                        binding.tvTopTag.setBackgroundColor(Color.parseColor("#2E7D32"));
+                        break;
+                    case "hecho a mano":
+                        binding.tvTopTag.setTextColor(Color.WHITE);
+                        binding.tvTopTag.setBackgroundColor(Color.parseColor("#E65100"));
+                        break;
+                    case "nuevo":
+                        binding.tvTopTag.setTextColor(Color.WHITE);
+                        binding.tvTopTag.setBackgroundColor(Color.parseColor("#00838F"));
+                        break;
+                    default:
+                        binding.tvTopTag.setBackgroundResource(R.drawable.bg_washi_tape);
+                }
             } else {
-                binding.tvProductoStockBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.badge_pocas_unidades_bg));
-                binding.tvProductoStockBadge.setTextColor(ContextCompat.getColor(context, R.color.badge_pocas_unidades_text));
+                binding.tvTopTag.setVisibility(View.GONE);
             }
 
-            binding.btnProductoComprar.setOnClickListener(v -> {
-                if (listener != null) listener.onComprarClick(item);
+            // Badge Chip Inferior
+            if (item.getBadgeChip() != null && !item.getBadgeChip().isEmpty()) {
+                binding.tvBadgeChip.setVisibility(View.VISIBLE);
+                binding.tvBadgeChip.setText(item.getBadgeChip());
+            } else {
+                binding.tvBadgeChip.setVisibility(View.GONE);
+            }
+
+            // Clics
+            binding.getRoot().setOnClickListener(v -> {
+                if (listener != null) listener.onProductClick(item);
+            });
+
+            binding.btnAgregar.setOnClickListener(v -> {
+                if (listener != null) {
+                    listener.onAddToCart(item, binding.btnAgregar);
+                }
             });
         }
     }

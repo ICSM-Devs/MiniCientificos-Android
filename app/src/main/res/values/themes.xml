@@ -1,41 +1,85 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base Application Theme Mini Científicos (Material 3) -->
+    <!-- Base Application Theme Mini Científicos (Material 3 - Kawaii Científico) -->
     <style name="Base.Theme.MiniCientificosAndroid" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Colores Primarios M3 -->
-        <item name="colorPrimary">@color/primary_blue</item>
+        <item name="colorPrimary">@color/pc_blue</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/colorPrimaryContainer</item>
-        <item name="colorOnPrimaryContainer">@color/colorOnPrimaryContainer</item>
+        <item name="colorPrimaryContainer">@color/pc_sky</item>
+        <item name="colorOnPrimaryContainer">@color/pc_navy</item>
 
         <!-- Colores Secundarios M3 -->
-        <item name="colorSecondary">@color/gold_yellow</item>
-        <item name="colorOnSecondary">@color/navy_blue</item>
+        <item name="colorSecondary">@color/pc_yellow</item>
+        <item name="colorOnSecondary">@color/pc_navy</item>
 
-        <!-- Fondos y Superficies -->
+        <!-- Fondos y Superficies Claros -->
         <item name="android:windowBackground">@color/bg_light</item>
         <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/dark_blue</item>
+        <item name="colorOnSurface">@color/pc_navy</item>
 
-        <!-- Status bar -->
-        <item name="android:statusBarColor">@color/navy_blue</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <!-- Status bar clara con iconos oscuros -->
+        <item name="android:statusBarColor">@color/pc_sky</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Theme.MiniCientificosAndroid" parent="Base.Theme.MiniCientificosAndroid" />
 
-    <!-- Estilos de Botones Personalizados -->
-    <style name="Widget.MiniCientificos.Button.Primary" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@color/primary_blue</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="cornerRadius">@dimen/button_corner_radius</item>
+    <!-- Estilos de Tipografía TextAppearance -->
+    <style name="TextAppearance.MiniCientificos.Heading" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/fredoka</item>
+        <item name="android:textColor">@color/pc_navy</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Widget.MiniCientificos.Button.Accent" parent="Widget.Material3.Button">
-        <item name="backgroundTint">@color/gold_yellow</item>
-        <item name="android:textColor">@color/navy_blue</item>
+    <style name="TextAppearance.MiniCientificos.Subheading" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/fredoka</item>
+        <item name="android:textColor">@color/pc_navy</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.MiniCientificos.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.MiniCientificos.Handwriting" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/kalam</item>
+        <item name="android:textColor">@color/pc_navy_deep</item>
+    </style>
+
+    <style name="TextAppearance.MiniCientificos.Price" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/fredoka</item>
+        <item name="android:textColor">@color/pc_blue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="TextAppearance.MiniCientificos.Badge" parent="TextAppearance.Material3.LabelMedium">
+        <item name="fontFamily">@font/nunito</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Estilos de Botones Personalizados -->
+    <style name="Widget.MiniCientificos.Button.Primary" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/pc_blue</item>
+        <item name="android:textColor">@color/white</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/fredoka</item>
+    </style>
+
+    <style name="Widget.MiniCientificos.Button.Eco" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/eco_green</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/fredoka</item>
+    </style>
+
+    <style name="Widget.MiniCientificos.Button.Accent" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/pc_yellow</item>
+        <item name="android:textColor">@color/pc_navy</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/fredoka</item>
     </style>
 
     <style name="Widget.MiniCientificos.Button.WhatsApp" parent="Widget.Material3.Button">
@@ -43,6 +87,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="android:textStyle">bold</item>
+        <item name="fontFamily">@font/fredoka</item>
     </style>
 
     <!-- Estilo de Imagen Circular -->

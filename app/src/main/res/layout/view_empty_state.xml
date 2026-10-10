@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp"
+    android:visibility="gone">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_rocket"
+        app:tint="@color/text_light"
+        android:contentDescription="Empty state icon" />
+
+    <TextView
+        android:id="@+id/tv_empty_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunito"
+        android:gravity="center"
+        android:text="No encontramos productos científicos con ese nombre"
+        android:textColor="@color/text_secondary"
+        android:textSize="16sp" />
+</LinearLayout>

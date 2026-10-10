@@ -1,173 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_light">
+    android:background="@color/bg_light"
+    tools:context=".ui.ShopFragment">
 
-    <!-- Header Tienda -->
-    <LinearLayout
-        android:id="@+id/ll_header_tienda"
-        android:layout_width="0dp"
+    <!-- AppBar Layout para mantener la cabecera fija -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="@dimen/spacing_m"
-        android:paddingTop="@dimen/spacing_m"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/bg_light"
+        app:elevation="0dp">
 
-        <TextView
-            android:id="@+id/tv_title_tienda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/fredoka"
-            android:text="Tienda Científica"
-            android:textColor="@color/navy_blue"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_subtitle_tienda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/poppins"
-            android:text="Kits educativos, experimentos y accesorios para pequeños genios"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp" />
-
-        <!-- Buscador -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_search_tienda"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_m"
-            app:boxBackgroundColor="@color/white"
-            app:boxCornerRadiusBottomEnd="@dimen/card_corner_radius"
-            app:boxCornerRadiusBottomStart="@dimen/card_corner_radius"
-            app:boxCornerRadiusTopEnd="@dimen/card_corner_radius"
-            app:boxCornerRadiusTopStart="@dimen/card_corner_radius"
-            app:boxStrokeColor="@color/primary_blue"
-            app:hintEnabled="false"
-            app:startIconDrawable="@drawable/ic_search"
-            app:startIconTint="@color/primary_blue">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_search_tienda"
+            <!-- Título Principal -->
+            <TextView
+                android:id="@+id/tv_shop_title"
+                style="@style/TextAppearance.MiniCientificos.Heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tienda Oficial"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tv_shop_subtitle"
+                style="@style/TextAppearance.MiniCientificos.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Lleva la ciencia a casa con nuestros increíbles productos" />
+
+            <!-- Barra de Búsqueda -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_search_shop"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:hint="Buscar kits, juegos, ropa..."
-                android:inputType="text"
-                android:paddingVertical="12dp"
-                android:textColor="@color/navy_blue"
-                android:textColorHint="@color/text_light"
-                android:textSize="14sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:layout_height="52dp"
+                android:layout_marginTop="16dp"
+                app:boxCornerRadiusBottomEnd="26dp"
+                app:boxCornerRadiusBottomStart="26dp"
+                app:boxCornerRadiusTopEnd="26dp"
+                app:boxCornerRadiusTopStart="26dp"
+                app:boxStrokeColor="@color/pc_blue"
+                app:endIconMode="clear_text"
+                app:hintEnabled="false"
+                app:startIconDrawable="@drawable/ic_search"
+                app:startIconTint="@color/pc_navy">
 
-    <!-- Filtros de Categoría (Kits, Accesorios, Ropa, Ecológico) -->
-    <HorizontalScrollView
-        android:id="@+id/hsv_filtros_tienda"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_s"
-        android:clipToPadding="false"
-        android:paddingHorizontal="@dimen/spacing_m"
-        android:scrollbars="none"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_header_tienda">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_search_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/nunito"
+                    android:hint="Buscar productos, kits, accesorios..."
+                    android:inputType="text"
+                    android:padding="0dp"
+                    android:textColor="@color/pc_navy"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group_tienda"
-            android:layout_width="wrap_content"
+        <!-- Filtros Rápidos (Chips) -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:singleLine="true"
-            app:singleSelection="true">
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp"
+            android:scrollbars="none">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_producto_todas"
-                style="@style/Widget.Material3.Chip.Filter"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/cg_shop_filters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:fontFamily="@font/fredoka"
-                android:text="Todas"
-                app:chipCornerRadius="@dimen/corner_radius_pill" />
+                app:singleSelection="true">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_producto_kits"
-                style="@style/Widget.Material3.Chip.Filter"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_todos"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Todos" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_peluches"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Peluches" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_accesorios"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accesorios" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_ropa"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ropa" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_papeleria"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Papelería" />
+            </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:gravity="center_vertical">
+
+            <!-- Contador de resultados -->
+            <TextView
+                android:id="@+id/tv_resultados_count"
+                style="@style/TextAppearance.MiniCientificos.Body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="17 productos encontrados"
+                android:textStyle="bold" />
+
+            <!-- Selector de Ordenación (Simulado con un TextView clicable por ahora) -->
+            <TextView
+                android:id="@+id/tv_ordenar"
+                style="@style/TextAppearance.MiniCientificos.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/fredoka"
-                android:text="Kits"
-                app:chipCornerRadius="@dimen/corner_radius_pill" />
+                android:text="Ordenar por ▼"
+                android:textColor="@color/pc_blue"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:background="?selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true" />
+        </LinearLayout>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_producto_accesorios"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/fredoka"
-                android:text="Accesorios"
-                app:chipCornerRadius="@dimen/corner_radius_pill" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/card_stroke" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_producto_ropa"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/fredoka"
-                android:text="Ropa"
-                app:chipCornerRadius="@dimen/corner_radius_pill" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_producto_ecologico"
-                style="@style/Widget.Material3.Chip.Filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/fredoka"
-                android:text="Ecológico"
-                app:chipCornerRadius="@dimen/corner_radius_pill" />
-
-        </com.google.android.material.chip.ChipGroup>
-    </HorizontalScrollView>
-
-    <!-- RecyclerView Grid 2 Columnas -->
+    <!-- Contenido Principal: Grilla de Productos -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_productos"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/spacing_s"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingHorizontal="@dimen/spacing_s"
-        android:paddingBottom="@dimen/spacing_xl"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hsv_filtros_tienda"
-        tools:listitem="@layout/item_producto" />
+        android:padding="8dp"
+        android:paddingBottom="80dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <!-- Estado Vacío -->
-    <TextView
-        android:id="@+id/tv_empty_productos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawablePadding="@dimen/spacing_s"
-        android:fontFamily="@font/poppins"
-        android:text="No se encontraron productos en esta categoría"
-        android:textColor="@color/text_secondary"
-        android:textSize="14sp"
-        android:visibility="gone"
-        app:drawableTopCompat="@drawable/ic_nav_shop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hsv_filtros_tienda" />
+    <LinearLayout
+        android:id="@+id/layout_empty_state_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <include
+            android:id="@+id/layout_empty_state"
+            layout="@layout/view_empty_state" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
