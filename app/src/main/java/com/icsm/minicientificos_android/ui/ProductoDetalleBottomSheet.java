@@ -76,7 +76,11 @@ public class ProductoDetalleBottomSheet extends BottomSheetDialogFragment {
         });
 
         binding.btnAgregarCarritoModal.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), cantidadActual + " x " + producto.getNombre() + " añadidos al carrito", Toast.LENGTH_SHORT).show();
+            com.icsm.minicientificos_android.cart.CartManager manager = com.icsm.minicientificos_android.cart.CartManager.getInstance();
+            for (int i = 0; i < cantidadActual; i++) {
+                manager.agregarProducto(producto);
+            }
+            CustomTopSnackbar.show(requireActivity(), producto.getNombre());
             dismiss();
         });
     }

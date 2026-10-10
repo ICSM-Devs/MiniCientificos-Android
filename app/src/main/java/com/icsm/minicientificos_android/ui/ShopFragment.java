@@ -172,6 +172,9 @@ public class ShopFragment extends Fragment implements ProductoAdapter.OnProductC
         btn.setText("¡Listo! ✓");
         btn.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#25D366"))); // Verde WhatsApp
 
+        com.icsm.minicientificos_android.cart.CartManager.getInstance().agregarProducto(producto);
+        CustomTopSnackbar.show(requireActivity(), producto.getNombre());
+
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             if (isAdded() && btn != null) {
                 btn.setText(originalText);
