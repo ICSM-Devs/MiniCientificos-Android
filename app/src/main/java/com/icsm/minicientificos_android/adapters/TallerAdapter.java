@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.icsm.minicientificos_android.R;
 import com.icsm.minicientificos_android.databinding.ItemTallerBinding;
-import com.icsm.minicientificos_android.models.TallerMock;
+import com.icsm.minicientificos_android.models.Taller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,16 +18,16 @@ import java.util.List;
 public class TallerAdapter extends RecyclerView.Adapter<TallerAdapter.TallerViewHolder> {
 
     public interface OnTallerClickListener {
-        void onVerDetalleClick(TallerMock taller);
+        void onVerDetalleClick(Taller taller);
     }
 
-    private final List<TallerMock> listaOriginal;
-    private final List<TallerMock> listaFiltrada;
+    private final List<Taller> listaOriginal;
+    private final List<Taller> listaFiltrada;
     private final OnTallerClickListener listener;
     private String textoFiltroActual = "";
     private String categoriaFiltroActual = "Todas";
 
-    public TallerAdapter(List<TallerMock> lista, OnTallerClickListener listener) {
+    public TallerAdapter(List<Taller> lista, OnTallerClickListener listener) {
         this.listaOriginal = new ArrayList<>(lista);
         this.listaFiltrada = new ArrayList<>(lista);
         this.listener = listener;
@@ -58,7 +58,7 @@ public class TallerAdapter extends RecyclerView.Adapter<TallerAdapter.TallerView
         }
 
         listaFiltrada.clear();
-        for (TallerMock item : listaOriginal) {
+        for (Taller item : listaOriginal) {
             boolean coincideTexto = item.getTitulo().toLowerCase().contains(textoFiltroActual)
                     || item.getDescripcionCorta().toLowerCase().contains(textoFiltroActual);
 
@@ -82,20 +82,20 @@ public class TallerAdapter extends RecyclerView.Adapter<TallerAdapter.TallerView
             this.binding = binding;
         }
 
-        public void bind(TallerMock item) {
+        public void bind(Taller item) {
             Context context = itemView.getContext();
             binding.tvTallerTitulo.setText(item.getTitulo());
             binding.tvTallerDescripcion.setText(item.getDescripcionCorta());
-            binding.tvTallerFecha.setText(item.getFecha());
-            binding.tvTallerCupos.setText(item.getCupos());
+            binding.tvTallerHorario.setText(item.getHorario());
+            binding.tvTallerCupos.setText(item.getVacantes());
             binding.tvModalidadBadge.setText(item.getModalidad());
-            binding.ivTallerImage.setImageResource(item.getImagenResId());
+            binding.ivTallerImage.setImageResource(item.getBannerDrawable());
 
             // Estilos del Badge según la modalidad
-            if ("Presencial".equalsIgnoreCase(item.getModalidad())) {
+            if (item.getModalidad().contains("Presencial") && !item.getModalidad().contains("Híbrido")) {
                 binding.tvModalidadBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.badge_presencial_bg));
                 binding.tvModalidadBadge.setTextColor(ContextCompat.getColor(context, R.color.badge_presencial_text));
-            } else if ("Virtual".equalsIgnoreCase(item.getModalidad())) {
+            } else if (item.getModalidad().contains("Virtual")) {
                 binding.tvModalidadBadge.setBackgroundTintList(ContextCompat.getColorStateList(context, R.color.badge_virtual_bg));
                 binding.tvModalidadBadge.setTextColor(ContextCompat.getColor(context, R.color.badge_virtual_text));
             } else {

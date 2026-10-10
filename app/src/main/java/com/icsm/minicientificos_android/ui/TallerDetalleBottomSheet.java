@@ -1,11 +1,12 @@
 package com.icsm.minicientificos_android.ui;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,18 +15,16 @@ import androidx.core.content.ContextCompat;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.icsm.minicientificos_android.R;
 import com.icsm.minicientificos_android.databinding.BottomSheetTallerDetalleBinding;
-import com.icsm.minicientificos_android.models.TallerMock;
-
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
+import com.icsm.minicientificos_android.models.Taller;
+import com.icsm.minicientificos_android.utils.WhatsAppHelper;
 
 public class TallerDetalleBottomSheet extends BottomSheetDialogFragment {
 
     private static final String ARG_TALLER = "arg_taller";
     private BottomSheetTallerDetalleBinding binding;
-    private TallerMock taller;
+    private Taller taller;
 
-    public static TallerDetalleBottomSheet newInstance(TallerMock taller) {
+    public static TallerDetalleBottomSheet newInstance(Taller taller) {
         TallerDetalleBottomSheet fragment = new TallerDetalleBottomSheet();
         Bundle args = new Bundle();
         args.putSerializable(ARG_TALLER, taller);
@@ -37,7 +36,7 @@ public class TallerDetalleBottomSheet extends BottomSheetDialogFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            taller = (TallerMock) getArguments().getSerializable(ARG_TALLER);
+            taller = (Taller) getArguments().getSerializable(ARG_TALLER);
         }
     }
 
@@ -58,48 +57,54 @@ public class TallerDetalleBottomSheet extends BottomSheetDialogFragment {
             return;
         }
 
-        // Llenar datos en las vistas
+        // Llenar datos principales
         binding.tvModalTitulo.setText(taller.getTitulo());
-        binding.tvModalDescripcionCompleta.setText(taller.getDescripcionCompleta());
-        binding.tvModalFecha.setText(taller.getFecha());
-        binding.tvModalCupos.setText(taller.getCupos());
-        binding.tvModalRequisitos.setText(taller.getRequisitos());
-        binding.tvModalPrecio.setText("Inversión: " + taller.getPrecio());
+        binding.tvModalObjetivoDesc.setText(taller.getObjetivo());
+        binding.tvModalHorario.setText(taller.getHorario());
+        binding.tvModalCupos.setText(taller.getVacantes());
+        binding.tvModalPrecio.setText(String.format("Inversión: S/ %.2f", taller.getPrecio()));
         binding.tvModalCategoria.setText(taller.getCategoria());
         binding.tvModalModalidad.setText(taller.getModalidad());
-        binding.ivModalTallerImage.setImageResource(taller.getImagenResId());
+        binding.ivModalTallerImage.setImageResource(taller.getBannerDrawable());
 
-        // Colores según la modalidad
         configurarBadgeModalidad(taller.getModalidad());
 
-        // Acción cerrar
+        // Llenar listas (Temario y Materiales)
+        poblarLista(binding.llTemarioContainer, taller.getTemario(), "• ");
+        poblarLista(binding.llMaterialesContainer, taller.getMaterialesIncluidos(), "✔️ ");
+
         binding.btnCloseSheet.setOnClickListener(v -> dismiss());
 
-        // Acción WhatsApp
-        binding.btnWhatsappInscribirse.setOnClickListener(v -> abrirWhatsappInscripcion());
+        binding.btnWhatsappInscribirse.setOnClickListener(v -> {
+            WhatsAppHelper.abrirInscripcionTaller(requireContext(), taller);
+            dismiss();
+        });
+    }
+
+    private void poblarLista(LinearLayout container, String[] items, String prefix) {
+        container.removeAllViews();
+        if (items != null) {
+            for (String item : items) {
+                TextView tv = new TextView(requireContext());
+                tv.setText(prefix + item);
+                tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary));
+                tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                tv.setPadding(0, 0, 0, 8); // marginBottom de 8px (aprox)
+                container.addView(tv);
+            }
+        }
     }
 
     private void configurarBadgeModalidad(String modalidad) {
-        if ("Presencial".equalsIgnoreCase(modalidad)) {
+        if (modalidad.contains("Presencial") && !modalidad.contains("Híbrido")) {
             binding.tvModalModalidad.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.badge_presencial_bg));
             binding.tvModalModalidad.setTextColor(ContextCompat.getColor(requireContext(), R.color.badge_presencial_text));
-        } else if ("Virtual".equalsIgnoreCase(modalidad)) {
+        } else if (modalidad.contains("Virtual")) {
             binding.tvModalModalidad.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.badge_virtual_bg));
             binding.tvModalModalidad.setTextColor(ContextCompat.getColor(requireContext(), R.color.badge_virtual_text));
         } else {
             binding.tvModalModalidad.setBackgroundTintList(ContextCompat.getColorStateList(requireContext(), R.color.badge_hibrido_bg));
             binding.tvModalModalidad.setTextColor(ContextCompat.getColor(requireContext(), R.color.badge_hibrido_text));
-        }
-    }
-
-    private void abrirWhatsappInscripcion() {
-        try {
-            String mensaje = "Hola Mini Científicos, deseo inscribirme en el taller: *" + taller.getTitulo() + "* (" + taller.getModalidad() + ").";
-            String url = "https://api.whatsapp.com/send?phone=51930754024&text=" + URLEncoder.encode(mensaje, StandardCharsets.UTF_8.name());
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

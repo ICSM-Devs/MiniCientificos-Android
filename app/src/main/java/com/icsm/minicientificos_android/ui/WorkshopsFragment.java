@@ -16,7 +16,8 @@ import com.google.android.material.chip.Chip;
 import com.icsm.minicientificos_android.R;
 import com.icsm.minicientificos_android.adapters.TallerAdapter;
 import com.icsm.minicientificos_android.databinding.FragmentWorkshopsBinding;
-import com.icsm.minicientificos_android.models.TallerMock;
+import com.icsm.minicientificos_android.models.Taller;
+import com.icsm.minicientificos_android.models.TalleresCatalogData;
 
 import java.util.List;
 
@@ -43,15 +44,12 @@ public class WorkshopsFragment extends Fragment implements TallerAdapter.OnTalle
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Cargar talleres de prueba
-        List<TallerMock> listaTalleres = TallerMock.getTalleresPrueba();
+        List<Taller> listaTalleres = TalleresCatalogData.getTalleres();
 
-        // Configurar Adapter y RecyclerView
         adapter = new TallerAdapter(listaTalleres, this);
         binding.rvTalleres.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvTalleres.setAdapter(adapter);
 
-        // Configurar Búsqueda
         binding.etSearchTalleres.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -66,7 +64,6 @@ public class WorkshopsFragment extends Fragment implements TallerAdapter.OnTalle
             public void afterTextChanged(Editable s) {}
         });
 
-        // Configurar Chips de Filtro
         binding.chipGroupTalleres.setOnCheckedStateChangeListener((group, checkedIds) -> {
             if (checkedIds.isEmpty()) {
                 filtroCategoriaSeleccionada = "Todas";
@@ -80,7 +77,10 @@ public class WorkshopsFragment extends Fragment implements TallerAdapter.OnTalle
                 }
             }
             filtrarLista();
+            actualizarSubtituloDinamico();
         });
+        
+        actualizarSubtituloDinamico();
     }
 
     private void filtrarLista() {
@@ -100,8 +100,22 @@ public class WorkshopsFragment extends Fragment implements TallerAdapter.OnTalle
         }
     }
 
+    private void actualizarSubtituloDinamico() {
+        String base = "Descubre y participa en nuestras experiencias";
+        if (!"Todas".equals(filtroCategoriaSeleccionada)) {
+            String categoria = filtroCategoriaSeleccionada.toLowerCase();
+            if (categoria.equals("presencial") || categoria.equals("virtual") || categoria.equals("híbrido")) {
+                binding.tvSubtitleTalleres.setText("Explora todos los talleres en modalidad " + categoria);
+            } else {
+                binding.tvSubtitleTalleres.setText("Explora todos los talleres de " + categoria);
+            }
+        } else {
+            binding.tvSubtitleTalleres.setText(base);
+        }
+    }
+
     @Override
-    public void onVerDetalleClick(TallerMock taller) {
+    public void onVerDetalleClick(Taller taller) {
         TallerDetalleBottomSheet bottomSheet = TallerDetalleBottomSheet.newInstance(taller);
         bottomSheet.show(getChildFragmentManager(), "TallerDetalleBottomSheet");
     }

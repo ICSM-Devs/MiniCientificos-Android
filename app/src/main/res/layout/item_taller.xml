@@ -2,10 +2,13 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_taller_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/spacing_m"
     android:layout_marginVertical="@dimen/spacing_s"
+    android:clickable="true"
+    android:focusable="true"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="@dimen/card_corner_radius"
     app:cardElevation="@dimen/card_elevation"
@@ -14,156 +17,149 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_m">
+        android:layout_height="wrap_content">
 
-        <!-- Contenedor Imagen Header / Icono -->
-        <FrameLayout
-            android:id="@+id/fl_image_container"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:background="@drawable/bg_badge_rounded"
-            android:backgroundTint="@color/titan_bg"
+        <!-- Imagen principal (Banner temático con esquinas redondeadas superiores) -->
+        <ImageView
+            android:id="@+id/iv_taller_image"
+            android:layout_width="0dp"
+            android:layout_height="160dp"
+            android:contentDescription="Imagen del taller"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/astronomia" />
 
-            <ImageView
-                android:id="@+id/iv_taller_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="Imagen del taller"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_flask" />
-        </FrameLayout>
-
-        <!-- Badge Modalidad -->
+        <!-- Chip de Modalidad sobre la imagen -->
         <TextView
             android:id="@+id/tv_modalidad_badge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_m"
+            android:layout_margin="@dimen/spacing_s"
             android:background="@drawable/bg_badge_rounded"
-            android:backgroundTint="@color/badge_presencial_bg"
             android:fontFamily="@font/poppins"
-            android:paddingHorizontal="10dp"
+            android:paddingHorizontal="12dp"
             android:paddingVertical="4dp"
-            android:textColor="@color/badge_presencial_text"
-            android:textSize="11sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/fl_image_container"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Presencial" />
+            tools:backgroundTint="#FF9800"
+            tools:text="Híbrido" />
 
-        <!-- Título del Taller -->
-        <TextView
-            android:id="@+id/tv_taller_titulo"
-            android:layout_width="0dp"
+        <!-- Contenedor Inferior con el resto de la info -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_m"
-            android:layout_marginTop="@dimen/spacing_xs"
-            android:fontFamily="@font/fredoka"
-            android:textColor="@color/navy_blue"
-            android:textSize="17sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/fl_image_container"
-            app:layout_constraintTop_toBottomOf="@id/tv_modalidad_badge"
-            tools:text="Pequeños Botánicos y Biohuertos" />
-
-        <!-- Descripción Corta -->
-        <TextView
-            android:id="@+id/tv_taller_descripcion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:ellipsize="end"
-            android:fontFamily="@font/poppins"
-            android:maxLines="2"
-            android:textColor="@color/text_secondary"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fl_image_container"
-            tools:text="Aprende sobre la vida de las plantas, germinación y creación de compostaje infantil." />
-
-        <!-- Divider ligero -->
-        <View
-            android:id="@+id/v_divider"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/spacing_m"
-            android:background="@color/card_stroke"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_taller_descripcion" />
-
-        <!-- Icono + Fecha -->
-        <ImageView
-            android:id="@+id/iv_ic_calendar"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="@dimen/spacing_s"
-            android:contentDescription="Fecha"
-            android:src="@drawable/ic_calendar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_divider"
-            app:tint="@color/primary_blue" />
-
-        <TextView
-            android:id="@+id/tv_taller_fecha"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_xs"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/text_secondary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_ic_calendar"
-            app:layout_constraintEnd_toStartOf="@id/btn_ver_detalle"
-            app:layout_constraintStart_toEndOf="@id/iv_ic_calendar"
-            app:layout_constraintTop_toTopOf="@id/iv_ic_calendar"
-            tools:text="Sábados 10:00 AM" />
-
-        <!-- Icono + Cupos -->
-        <ImageView
-            android:id="@+id/iv_ic_users"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginTop="@dimen/spacing_xs"
-            android:contentDescription="Cupos"
-            android:src="@drawable/ic_users"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_ic_calendar"
-            app:tint="@color/primary_blue" />
-
-        <TextView
-            android:id="@+id/tv_taller_cupos"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_xs"
-            android:fontFamily="@font/poppins"
-            android:textColor="@color/text_secondary"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_ic_users"
-            app:layout_constraintEnd_toStartOf="@id/btn_ver_detalle"
-            app:layout_constraintStart_toEndOf="@id/iv_ic_users"
-            app:layout_constraintTop_toTopOf="@id/iv_ic_users"
-            tools:text="8 vacantes" />
-
-        <!-- Botón Ver Detalle -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_ver_detalle"
-            style="@style/Widget.MiniCientificos.Button.Primary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/fredoka"
-            android:paddingHorizontal="16dp"
-            android:text="Ver Detalle"
-            android:textSize="13sp"
-            app:cornerRadius="@dimen/button_corner_radius"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_m"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/v_divider" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_taller_image">
 
+            <!-- Título en Fredoka -->
+            <TextView
+                android:id="@+id/tv_taller_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fredoka"
+                android:textColor="@color/navy_blue"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Astronomía y Exploración" />
+
+            <!-- Descripción en Nunito -->
+            <TextView
+                android:id="@+id/tv_taller_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/nunito"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                tools:text="Viaja al espacio sin salir de casa. Comprender el sistema solar y construir modelos a escala." />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="@dimen/spacing_s"
+                android:background="#E2E8F0" />
+
+            <!-- Fila Informativa (Calendario y Personas) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Calendario"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="@color/primary_blue" />
+
+                    <TextView
+                        android:id="@+id/tv_taller_horario"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        tools:text="Sábados 4:00 PM - 6:00 PM" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:contentDescription="Vacantes"
+                        android:src="@drawable/ic_users"
+                        app:tint="@color/gold_yellow" />
+
+                    <TextView
+                        android:id="@+id/tv_taller_cupos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        tools:text="10 vacantes" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Botón Ecológico Verde -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_ver_detalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_m"
+                android:backgroundTint="#89B45D"
+                android:fontFamily="@font/fredoka"
+                android:text="Ver detalle"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:cornerRadius="24dp" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </com.google.android.material.card.MaterialCardView>

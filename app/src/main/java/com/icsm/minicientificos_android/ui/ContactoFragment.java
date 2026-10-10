@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.icsm.minicientificos_android.databinding.FragmentContactoBinding;
+import com.icsm.minicientificos_android.utils.WhatsAppHelper;
 
 public class ContactoFragment extends Fragment {
 
@@ -124,6 +125,8 @@ public class ContactoFragment extends Fragment {
         }
 
         if (esValido) {
+            WhatsAppHelper.abrirConsultaContacto(requireContext(), nombre, email, telefono, asunto, mensaje);
+            
             // Limpiar formulario
             binding.etNombre.setText("");
             binding.etEmail.setText("");
@@ -135,7 +138,7 @@ public class ContactoFragment extends Fragment {
             binding.getRoot().clearFocus();
 
             Toast.makeText(requireContext(),
-                    "🚀 ¡Mensaje Espacial Enviado con Éxito!\nTe responderemos a la velocidad de la luz, " + nombre + ".",
+                    "🚀 ¡Abriendo WhatsApp para enviar mensaje!",
                     Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(requireContext(),
