@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingHorizontal="@dimen/spacing_m"
+    android:paddingVertical="@dimen/spacing_s">
+
+    <!-- Imagen del Producto -->
+    <FrameLayout
+        android:id="@+id/fl_cart_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="@drawable/bg_badge_rounded"
+        android:backgroundTint="@color/tesla_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_cart_producto_imagen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="Imagen producto"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_flask" />
+    </FrameLayout>
+
+    <!-- Información -->
+    <TextView
+        android:id="@+id/tv_cart_producto_nombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_m"
+        android:layout_marginEnd="@dimen/spacing_s"
+        android:ellipsize="end"
+        android:fontFamily="@font/fredoka"
+        android:maxLines="2"
+        android:textColor="@color/navy_blue"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@id/btn_cart_remove_item"
+        app:layout_constraintStart_toEndOf="@id/fl_cart_image"
+        app:layout_constraintTop_toTopOf="@id/fl_cart_image"
+        tools:text="Kit Bobina Tesla Experimentos" />
+
+    <TextView
+        android:id="@+id/tv_cart_producto_precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="@id/tv_cart_producto_nombre"
+        app:layout_constraintTop_toBottomOf="@id/tv_cart_producto_nombre"
+        tools:text="S/ 65.00" />
+
+    <!-- Controles de Cantidad -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_cart_producto_nombre"
+        app:layout_constraintTop_toBottomOf="@id/tv_cart_producto_precio">
+
+        <ImageButton
+            android:id="@+id/btn_cart_minus"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/bg_circle_action"
+            android:contentDescription="Disminuir"
+            android:src="@drawable/ic_remove" />
+
+        <TextView
+            android:id="@+id/tv_cart_cantidad"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/fredoka"
+            android:gravity="center"
+            android:textColor="@color/text_primary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="2" />
+
+        <ImageButton
+            android:id="@+id/btn_cart_plus"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="@drawable/bg_circle_action"
+            android:contentDescription="Aumentar"
+            android:src="@drawable/ic_add" />
+    </LinearLayout>
+
+    <!-- Botón Eliminar -->
+    <ImageButton
+        android:id="@+id/btn_cart_remove_item"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Eliminar"
+        android:src="@drawable/ic_trash"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
