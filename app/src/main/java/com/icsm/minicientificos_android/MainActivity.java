@@ -12,15 +12,32 @@ import com.icsm.minicientificos_android.ui.HomeFragment;
 import com.icsm.minicientificos_android.ui.ShopFragment;
 import com.icsm.minicientificos_android.ui.WorkshopsFragment;
 
-public class MainActivity extends AppCompatActivity {
+import com.icsm.minicientificos_android.cart.CartManager;
+import com.icsm.minicientificos_android.ui.CartBadgeHelper;
+import com.icsm.minicientificos_android.ui.CartBottomSheetDialog;
+
+public class MainActivity extends AppCompatActivity implements CartManager.OnCartChangeListener {
 
     private ActivityMainBinding binding;
+    private CartBadgeHelper cartBadgeHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Inicializar Gestor de Carrito
+        CartManager.getInstance().addListener(this);
+
+        // Inicializar Badge de Carrito en el FAB o BottomNav
+        cartBadgeHelper = new CartBadgeHelper(binding.bottomNavigation, R.id.nav_shop);
+        
+        // Clic en FAB Carrito
+        binding.fabCart.setOnClickListener(v -> {
+            CartBottomSheetDialog bottomSheet = new CartBottomSheetDialog();
+            bottomSheet.show(getSupportFragmentManager(), "CartBottomSheet");
+        });
 
         // Fragment por defecto (HomeFragment)
         if (savedInstanceState == null) {
@@ -57,5 +74,28 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .commit();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (cartBadgeHelper != null) {
+            cartBadgeHelper.updateBadge();
+        }
+    }
+
+    @Override
+    public void onCartChanged() {
+        runOnUiThread(() -> {
+            if (cartBadgeHelper != null) {
+                cartBadgeHelper.updateBadge();
+            }
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        com.icsm.minicientificos_android.cart.CartManager.getInstance().removeListener(this);
     }
 }
