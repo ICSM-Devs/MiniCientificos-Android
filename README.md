@@ -2,9 +2,10 @@
 
 ## 📌 Descripción del Proyecto
 
-**Mini Científicos** es una aplicación nativa para Android desarrollada en **Java**, diseñada para trasladar la experiencia de la plataforma web oficial a una interfaz móvil interactiva, colorida y optimizada. Su objetivo es acercar la ciencia a niños, padres de familia y colegios mediante talleres, experimentos en vivo, espectáculos y kits educativos.
+**Mini Científicos** es una aplicación nativa para Android desarrollada en **Java**, diseñada para trasladar la experiencia de la plataforma web oficial a una interfaz móvil interactiva, colorida y optimizada.
+Su objetivo es acercar la ciencia a niños, padres de familia y colegios mediante talleres, experimentos en vivo, espectáculos y kits educativos.
 
-El sistema destaca por su enfoque "Kawaii Científico", con componentes visuales adaptados para el público infantil, un e-commerce completamente funcional mediante manejo de estado dinámico y una potente integración con WhatsApp.
+El sistema destaca por su enfoque científico, con componentes visuales, un e-commerce completamente funcional mediante manejo de estado dinámico e integración con WhatsApp.
 
 ---
 
@@ -17,12 +18,12 @@ El sistema destaca por su enfoque "Kawaii Científico", con componentes visuales
 
 ---
 
-## 🛍️ Módulos de E-commerce y Detalles (¡NUEVO!)
+## 🛍️ Módulos de E-commerce, Detalles e Interacciones
 
-| Detalle de Taller | Detalle de Producto | Carrito de Compras |
-| :---: | :---: | :---: |
-| <img src=".github-assets/detalle_taller.png" width="180" alt="Detalle Taller"> | <img src=".github-assets/detalle_producto.png" width="180" alt="Detalle Producto"> | <img src=".github-assets/carrito_compras.png" width="180" alt="Carrito de Compras"> |
 
+| Personajes | Detalle de Taller | Detalle de Producto | Carrito de Compras | Pedido WhatsApp |
+| :---: | :---: | :---: | :---: | :---: |
+| <img src=".github-assets/personajes.png" width="180" alt="Detalle Personajes"> | <img src=".github-assets/taller_detalle.png" width="180" alt="Detalle Taller"> | <img src=".github-assets/producto_detalle.png" width="180" alt="Detalle Producto"> | <img src=".github-assets/carrito.png" width="180" alt="Carrito de Compras"> | <img src=".github-assets/whatsapp.jpg" width="180" alt="Generación de Pedido"> |
 ---
 
 ## 🛠️ Tecnologías y Stack Utilizado
@@ -79,10 +80,11 @@ app/src/main/java/com/icsm/minicientificos_android/
    * **`CartBottomSheetDialog`**: Pantalla de *Checkout* donde se resumen las compras, se recalculan totales en tiempo real, se eliminan ítems y se procesa el pago a través de un mensaje automatizado de WhatsApp.
 
 4. 🖼️ **Galería:**
-   * Cuadrícula fotográfica (`GridLayoutManager`) de eventos reales y actividades escolares.
+   * Cuadrícula fotográfica (`GridLayoutManager`) de eventos reales y actividades.
 
 5. 📞 **Contacto Espacial:**
-   * Formulario lúdico con estética "Kawaii Científico" e integración para contrataciones.
+   * Formulario e integración para contrataciones.
+
 
 ---
 
@@ -103,9 +105,11 @@ app/src/main/java/com/icsm/minicientificos_android/
 
 ## 👨‍💻 Desarrollado por
 
-*   **Miguel Córdova**
-*   **Mateo Vicente**
-*   **Oscar Quille**
+| Miguel Córdova | Mateo Vicente | Oscar Quille |
+| :---: | :---: | :---: |
+| 🚀 Android Developer | 🚀 Android Developer | 🚀 Android Developer |
+| <img src=""> | <img src=""> | <img src=""> |
+
 
 <br>
 
