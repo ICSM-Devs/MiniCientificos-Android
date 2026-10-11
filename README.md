@@ -2,10 +2,21 @@
 
 ## 📌 Descripción del Proyecto
 
-**Mini Científicos** es una aplicación nativa para Android desarrollada en **Java**, diseñada para trasladar la experiencia de la plataforma web oficial a una interfaz móvil interactiva, colorida y optimizada.
-Su objetivo es acercar la ciencia a niños, padres de familia y colegios mediante talleres, experimentos en vivo, espectáculos y kits educativos.
+<table>
+  <tr>
+    <td valign="middle" width="65%">
+      <strong>Mini Científicos</strong> es una aplicación nativa para Android desarrollada en <b>Java</b>, diseñada para trasladar la experiencia de la plataforma web oficial a una interfaz móvil interactiva, colorida y optimizada. Su objetivo es acercar la ciencia a niños, padres de familia y colegios mediante talleres, experimentos en vivo, espectáculos y kits educativos.<br><br>
+      El sistema destaca por su enfoque científico, con componentes visuales, un e-commerce completamente funcional mediante manejo de estado dinámico e integración con WhatsApp.
+    </td>
+    <td align="center" valign="middle" width="35%">
+      <picture>
+        <source srcset="https://github.com/mrpeak-1/MiniCientificos-Android/blob/main/.github-assets/android.gif?raw=true">
+        <img src="https://github.com/mrpeak-1/MiniCientificos-Android/blob/main/.github-assets/android.gif?raw=true" width="200" alt="Mini Científicos Demo">
+      </picture>
+    </td>
+  </tr>
+</table>
 
-El sistema destaca por su enfoque científico, con componentes visuales, un e-commerce completamente funcional mediante manejo de estado dinámico e integración con WhatsApp.
 
 ---
 
@@ -15,6 +26,8 @@ El sistema destaca por su enfoque científico, con componentes visuales, un e-co
 | Inicio | Talleres | Tienda | Galería | Contacto |
 | :---: | :---: | :---: | :---: | :---: |
 | <img src=".github-assets/inicio.png" width="180" alt="Inicio"> | <img src=".github-assets/talleres.png" width="180" alt="Talleres"> | <img src=".github-assets/tienda.png" width="180" alt="Tienda"> | <img src=".github-assets/galeria.png" width="180" alt="Galería"> | <img src=".github-assets/contacto.png" width="180" alt="Contacto"> |
+
+
 
 ---
 
@@ -108,8 +121,7 @@ app/src/main/java/com/icsm/minicientificos_android/
 | Miguel Córdova | Mateo Vicente | Oscar Quille |
 | :---: | :---: | :---: |
 | 🚀 Android Developer | 🚀 Android Developer | 🚀 Android Developer |
-| <img src=""> | <img src=""> | <img src=""> |
-
+| <picture><img src="https://github.com/mrpeak-1/MiniCientificos-Android/blob/main/.github-assets/programmer.gif?raw=true" width="200" alt="James"></picture> | <picture><img src="https://github.com/mrpeak-1/MiniCientificos-Android/blob/main/.github-assets/programmer.gif?raw=true" width="200" alt="Mateo"></picture> | <picture><img src="https://github.com/mrpeak-1/MiniCientificos-Android/blob/main/.github-assets/programmer.gif?raw=true" width="200" alt="Oscar"></picture> |
 
 <br>
 
